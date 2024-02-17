@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Home from "./Home"
 import App from "./App";
 
-const Navbar = ({darkMode,isDarkMode,fetchData,search,handleClickEvent}) => {
+const Navbar = ({darkMode,isDarkMode,search,handleClickEvent}) => {
     return ( 
         <nav className="flex flex-row justify-between items-center pt-4 px-4">
                 <label class="relative inline-flex items-center cursor-pointer">

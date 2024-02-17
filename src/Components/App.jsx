@@ -9,7 +9,8 @@ function App() {
     
     const api ={
       key: "ec3042a3092a57e5850206a04c93630e",
-      base: "https://api.openweathermap.org/data/2.5/weather?q",
+      base: "https://api.openweathermap.org/data/2.5/weather?",
+      main:"https://api.openweathermap.org/data/2.5/weather?lat=17.40756&lon=78.4772&appid=ec3042a3092a57e5850206a04c93630e",
   }
   const [isDarkMode,useIsDarkMode] = useState(true)
   const darkMode = () =>{
@@ -23,25 +24,26 @@ function App() {
   }
   const fetchData = async (search) => {
     try {
-      const response = await fetch(`${api.base}=${search}&appid=${api.key}&units=metric`);
+      const response = await fetch('https://api.openweathermap.org/data/2.5/weather?lat=17.40756&lon=78.4772&appid=ec3042a3092a57e5850206a04c93630e');
       const data = await response.json();
       setData(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-  
-  
+  console.log(data)
+
   useEffect(() => {
-    fetchData(search);
-    console.log(data)
+    if(click){
+      fetchData(search)
+    }
   }, [click]);
 
  
   return (
    <div className={`pb-1 ${isDarkMode?"bg-gradient-to-r from-[#424242] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
-      <Navbar darkMode = {darkMode} isDarkMode={isDarkMode} fetchData={fetchData} search={Search} handleClickEvent={handleClickEvent}/>
-      <Home isDarkMode={isDarkMode} search={search} />
+      <Navbar darkMode = {darkMode} isDarkMode={isDarkMode} search={Search} handleClickEvent={handleClickEvent}/>
+      <Home isDarkMode={isDarkMode} search={search} data={data}/>
    </div>
   )
 }

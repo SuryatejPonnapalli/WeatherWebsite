@@ -1,13 +1,16 @@
-const Weather = ({isDarkMode}) => {
+const Weather = ({isDarkMode,data}) => {
+    const temp = Math.floor(data.main.temp);
+    const feelsTemp = Math.floor(data.main.feels_like);
+    let weather = data.weather[0].main;
     return ( 
         <section className={`flex flex-row pl-6 justify-between shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
             <article>
                 <div className="flex flex-col">
                     <h2 className={`font-bold ${isDarkMode?"inline-block bg-gradient-to-r from-white to-[#747474] bg-clip-text text-6xl text-transparent  ":"inline-block bg-gradient-to-r from-[#323232] to-[#A2A2A2] bg-clip-text text-6xl text-transparent"}`}>
-                        24°C
+                       {temp}°C
                     </h2>
                     <h4 className={`font-bold pl-2  ${isDarkMode?"inline-block bg-gradient-to-r from-white to-[#747474] bg-clip-text text-xl text-transparent  ":"inline-block bg-gradient-to-r from-[#323232] to-[#A2A2A2] bg-clip-text text-xl text-transparent"}`}>
-                        Feels like: 22°
+                        Feels like: {feelsTemp}°C
                     </h4>
                 </div>
                 <div className="flex flex-row pt-6 items-center">
@@ -47,7 +50,7 @@ const Weather = ({isDarkMode}) => {
                 </svg>
                 </div>
                 <div className="flex justify-center pt-4">
-                    <h4 className="text-2xl font-bold">Sunny</h4>
+                    <h4 className="text-2xl font-bold">{weather}</h4>
                 </div>
             </aside>
         </section>

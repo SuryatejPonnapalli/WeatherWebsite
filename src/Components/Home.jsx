@@ -3,15 +3,15 @@ import FiveDay from "./FiveDay";
 import HourlyWeather from "./HourlyWeather";
 import Weather from "./Weather";
 
-const Home = ({isDarkMode,search}) => {
-    
+const Home = ({isDarkMode,search,data}) => {
+
 
     return ( 
         <div className="flex flex-col items-center justify-center">
-           <DateDiv isDarkMode={isDarkMode} search={search}/> 
-           <Weather isDarkMode={isDarkMode} />
-           <FiveDay isDarkMode={isDarkMode} />
-           <HourlyWeather isDarkMode={isDarkMode} />
+           <DateDiv isDarkMode={isDarkMode} search={search} data={data} /> 
+           <Weather isDarkMode={isDarkMode} data={data} />
+           <FiveDay isDarkMode={isDarkMode} data={data} />
+           <HourlyWeather isDarkMode={isDarkMode} data={data} />
         </div>
      );
 }
