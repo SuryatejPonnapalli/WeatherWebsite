@@ -6,13 +6,18 @@ function App() {
     const [data, setData] = useState(null);
     const [click, setClick] = useState(false);
     const [search,setSearch] = useState("Hyderabad");
+    const [dailyData, setDailyData] = useState(null);
+    const [lat, setLat] = useState(null);
+    const [lon, setLon] = useState(null);
+    const [localTime, setLocalTime] = useState(new Date());
+    const date = new Date();
+    const [timezone,setTimezone] = useState(null)
+    const [sunriseHour, setSunriseHour] = useState('');
+    const [sunriseMinute, setSunriseMinute] = useState('');
+    const [sunsetHour, setSunsetHour] = useState('');
+    const [sunsetMinute, setSunsetMinute] = useState('');
     const [ipAddress,setIpAddress] = useState(null);
     const [getCurrentLocation, setGetCurrentLocation] = useState(false);
-    const [dailyData, setDailyData] = useState(null)
-    const [lat, setLat] = useState(null)
-    const [lon, setLon] = useState(null)
-    const [localTime, setLocalTime] = useState(new Date())
-    const date = new Date();
     
   const [isDarkMode,useIsDarkMode] = useState(true)
   const darkMode = () =>{
@@ -43,13 +48,10 @@ function App() {
   //   fetchIpAddress();
   // },[getCurrentLocation])
 
-  useEffect(() =>{
-    currentLocation();
-  },[getCurrentLocation])
-
   useEffect(() => {
     currentLocation();
   },[click])
+
 
   const fetchInitialData = async() => {
     try{
@@ -58,6 +60,49 @@ function App() {
       setData(data1)
       setLat(data1.coord.lat)
       setLon(data1.coord.lon)
+      const milliseconds = data1.sys.sunrise * 1000;
+      const offsetSeconds = data1.timezone;
+      const dateObject = new Date(milliseconds);
+
+      // Get the UTC hours and minutes components
+      const hoursUTC = dateObject.getUTCHours();
+      const minutesUTC = dateObject.getUTCMinutes();
+
+      // Get the local hours and minutes components by applying the offset
+      const totalSeconds = (hoursUTC * 3600) + (minutesUTC * 60) + offsetSeconds;
+      const hoursLocal = Math.floor(totalSeconds / 3600) % 24; // Ensure it stays within 24-hour format
+      const minutesLocal = Math.floor((totalSeconds % 3600) / 60);
+      if(hoursLocal < 10){
+        setSunriseHour('0'+hoursLocal.toString())
+      }else{
+        setSunriseHour(hoursLocal.toString())
+      }
+      if(minutesLocal < 10){
+        setSunriseMinute('0'+minutesLocal.toString())
+      }else{
+        setSunriseMinute(minutesLocal.toString())
+      }
+      const milliseconds1 = data1.sys.sunset * 1000;
+      const dateObject1 = new Date(milliseconds1);
+
+      // Get the UTC hours and minutes components
+      const hoursUTC1 = dateObject1.getUTCHours();
+      const minutesUTC1 = dateObject1.getUTCMinutes();
+
+      // Get the local hours and minutes components by applying the offset
+      const totalSeconds1 = (hoursUTC1 * 3600) + (minutesUTC1 * 60) + offsetSeconds;
+      const hoursLocal1 = (Math.floor(totalSeconds1 / 3600) % 24)-12; // Ensure it stays within 24-hour format
+      const minutesLocal1 = Math.floor((totalSeconds1 % 3600) / 60);
+      if(hoursLocal1 < 10){
+        setSunsetHour('0'+hoursLocal1.toString())
+      }else{
+        setSunsetHour(hoursLocal1.toString())
+      }
+      if(minutesLocal1 < 10){
+        setSunsetMinute('0'+minutesLocal1.toString())
+      }else{
+        setSunsetMinute(minutesLocal1.toString())
+      }
     }catch(error){
       console.log("Failed to fetch address:"+error)
     }
@@ -88,9 +133,9 @@ function App() {
         try {
             const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?key=6b7cec98711849d2866a0c6a1f12d433&q=${lat},${lon}&pretty=1`);
             const data1 = await response.json();
-            const timezone = data1.results[0].annotations.timezone.name
+            const timezone1 = data1.results[0].annotations.timezone.name;
             setLocalTime(date.toLocaleString("en-US", {
-              timeZone: timezone
+              timeZone: timezone1
           }));
         } catch (error) {
             console.error("Error:", error);
@@ -100,10 +145,12 @@ function App() {
 };
 
 
+
   return (
    <div className={`pb-1 ${isDarkMode?"bg-gradient-to-r from-[#424242] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
       <Navbar darkMode = {darkMode} isDarkMode={isDarkMode} search={Search} handleClickEvent={handleClickEvent} handleClickEvent2={handleClickEvent2} />
-      <Home isDarkMode={isDarkMode} search={search} data={data} dailyData={dailyData} localTime={localTime}/>
+      <Home isDarkMode={isDarkMode} search={search} data={data} dailyData={dailyData} localTime={localTime}
+      sunriseHour={sunriseHour} sunriseMinute={sunriseMinute} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute}/>
    </div>
   )
 }

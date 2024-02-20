@@ -1,6 +1,6 @@
 import Icon from "./Icon";
 
-const Weather = ({isDarkMode,data}) => {
+const Weather = ({isDarkMode,data,sunriseHour,sunriseMinute,sunsetHour,sunsetMinute}) => {
     let temp = null;
     let feelsTemp = null;
     let weather = null;
@@ -33,7 +33,7 @@ const Weather = ({isDarkMode,data}) => {
                     </div>
                     <div className="pl-4">
                         <h3>Sunrise</h3>
-                        <p>6:00am</p>
+                        <p>{sunriseHour}:{sunriseMinute}am</p>
                     </div>
                 </div>
                 <div className="flex flex-row items-center pt-2">
@@ -44,7 +44,7 @@ const Weather = ({isDarkMode,data}) => {
                     </div>
                     <div className="pl-6">
                         <h3>Sunset</h3>
-                        <p>6:00pm</p>
+                        <p>{sunsetHour}:{sunsetMinute}pm</p>
                     </div>
                 </div>
             </article>
