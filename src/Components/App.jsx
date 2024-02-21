@@ -11,12 +11,10 @@ function App() {
     const [lon, setLon] = useState(null);
     const [localTime, setLocalTime] = useState(new Date());
     const date = new Date();
-    const [timezone,setTimezone] = useState(null)
     const [sunriseHour, setSunriseHour] = useState('');
     const [sunriseMinute, setSunriseMinute] = useState('');
     const [sunsetHour, setSunsetHour] = useState('');
     const [sunsetMinute, setSunsetMinute] = useState('');
-    const [ipAddress,setIpAddress] = useState(null);
     const [getCurrentLocation, setGetCurrentLocation] = useState(false);
     
   const [isDarkMode,useIsDarkMode] = useState(true)
@@ -40,17 +38,25 @@ function App() {
     fetchInitialData();
   },[click])
 
+  useEffect(() => {
+        currentLocation();
+    }, [data]);
+  
+  useEffect(() => {
+      fetchIpAddress();
+    },[getCurrentLocation])
+    
+  useEffect(() => {
+      fetchInitialData();
+    },[getCurrentLocation])
+
   // useEffect(() => {
   //   fetchDailyData();
   // },[click])
 
   // useEffect(() =>{
-  //   fetchIpAddress();
+    
   // },[getCurrentLocation])
-
-  useEffect(() => {
-    currentLocation();
-  },[click])
 
 
   const fetchInitialData = async() => {
@@ -118,15 +124,15 @@ function App() {
   //   }
   // }
 
-  // const fetchIpAddress = async() => {
-  //   try{
-  //     const response = await fetch('https://api.ipify.org');
-  //     const data = await response.text();
-  //     setIpAddress(data);
-  //   }catch(error){
-  //     console.log("Error detected",error);
-  //   }
-  //  }
+  const fetchIpAddress = async() => {
+    try{
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      setSearch(data.city);
+    }catch(error){
+      console.log("Error detected",error);
+    }
+   }
 
    const currentLocation = async(data) => {
     if(data !== null){
@@ -137,14 +143,28 @@ function App() {
             setLocalTime(date.toLocaleString("en-US", {
               timeZone: timezone1
           }));
+          console.log(data1.results[0].annotations.timezone.name)
         } catch (error) {
             console.error("Error:", error);
         }
         
     }
 };
-
-
+  // const locationFinder = async(ipAddress) =>{
+  //   if(ipAddress !== null){
+  //   try {
+  //     const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?key=6b7cec98711849d2866a0c6a1f12d433&q=${ipAddress}&pretty=1`);
+  //     const data = await response.json();
+  //     const timezone = data.results[0].annotations.timezone.name;
+  //     setLocalTime(date.toLocaleString("en-US", {
+  //       timeZone: timezone
+  //   }));
+  //   console.log(data);
+  // } catch (error) {
+  //     console.error("Error:", error);
+  // }
+  //     }
+  //   }
 
   return (
    <div className={`pb-1 ${isDarkMode?"bg-gradient-to-r from-[#424242] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
