@@ -16,6 +16,10 @@ function App() {
     const [sunsetHour, setSunsetHour] = useState('');
     const [sunsetMinute, setSunsetMinute] = useState('');
     const [getCurrentLocation, setGetCurrentLocation] = useState(false);
+    const [timeHours, setTimeHours] = useState(null);
+    const [compareHour, setCompareHour] = useState(null);
+    const [compareHour1, setCompareHour1] = useState(null);
+    const [compareHour2, setCompareHour2] = useState(null);
     
   const [isDarkMode,useIsDarkMode] = useState(true)
   const darkMode = () =>{
@@ -39,21 +43,33 @@ function App() {
   },[click])
 
   useEffect(() => {
+    fetchDailyData();
+  },[click])
+
+
+  useEffect(() => {
         currentLocation();
     }, [data]);
   
   useEffect(() => {
-      fetchIpAddress();
+    fetchIpAddress();
     },[getCurrentLocation])
     
   useEffect(() => {
-      fetchInitialData();
+    fetchInitialData();
     },[getCurrentLocation])
 
-  // useEffect(() => {
-  //   fetchDailyData();
-  // },[click])
+    useEffect(() => {
+      fetchDailyData();
+    },[click])
 
+    useEffect(() => {
+      // Check if localTime and timeHours are both available
+      if (localTime && timeHours !== null) {
+          compareHours(localTime, timeHours);
+      }
+  }, [localTime, timeHours, click]);
+  
   // useEffect(() =>{
     
   // },[getCurrentLocation])
@@ -114,15 +130,16 @@ function App() {
     }
   }
 
-  // const fetchDailyData = async() => {
-  //   try{
-  //     const response1 = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=ec3042a3092a57e5850206a04c93630e&units=metric`);
-  //     const data1 = await response1.json();
-  //     setDailyData(data1);
-  //   }catch(error){
-  //     console.log("Failed to fetch address:"+error)
-  //   }
-  // }
+  const fetchDailyData = async() => {
+    try{
+      const response1 = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=ec3042a3092a57e5850206a04c93630e&units=metric`);
+      const data1 = await response1.json();
+      setTimeHours(data1.list);
+
+    }catch(error){
+      console.log("Failed to fetch address:"+error)
+    }
+  }
 
   const fetchIpAddress = async() => {
     try{
@@ -141,36 +158,49 @@ function App() {
             const data1 = await response.json();
             const timezone1 = data1.results[0].annotations.timezone.name;
             setLocalTime(date.toLocaleString("en-US", {
+              hour12: false,
               timeZone: timezone1
           }));
-          console.log(data1.results[0].annotations.timezone.name)
         } catch (error) {
             console.error("Error:", error);
         }
         
     }
 };
-  // const locationFinder = async(ipAddress) =>{
-  //   if(ipAddress !== null){
-  //   try {
-  //     const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?key=6b7cec98711849d2866a0c6a1f12d433&q=${ipAddress}&pretty=1`);
-  //     const data = await response.json();
-  //     const timezone = data.results[0].annotations.timezone.name;
-  //     setLocalTime(date.toLocaleString("en-US", {
-  //       timeZone: timezone
-  //   }));
-  //   console.log(data);
-  // } catch (error) {
-  //     console.error("Error:", error);
-  // }
-  //     }
-  //   }
+
+const compareHours = (localTime, timeHours) => {
+  if(timeHours !== null){
+  // Check if localTime is a string
+  if (typeof localTime === 'string') {
+      // Extract hours from localTime
+      const timeComponents = localTime.split(", ")[1].split(":");
+      const hours = parseInt(timeComponents[0]);
+
+      // Iterate through the first 40 elements of timeHours
+      for (let i = 0; i < 40 && i < timeHours.length; i++) {
+          // Extract hours from dt_txt of current element
+          const timeParts = timeHours[i].dt_txt.split(' ')[1].split(':');
+          const elementHours = parseInt(timeParts[0]);
+
+          // Compare the hours
+          if (hours < elementHours) {
+              // Set compareHour, compareHour1, and compareHour2 based on the comparison result
+              setCompareHour(timeHours[i]);
+              setCompareHour1(timeHours[i + 1]);
+              setCompareHour2(timeHours[i + 2]);
+              break; // Exit the loop once the comparison is done
+           }
+       }
+    }
+  }
+}
+
 
   return (
-   <div className={`pb-1 ${isDarkMode?"bg-gradient-to-r from-[#424242] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
+   <div className={`pb-1 ${isDarkMode?"bg-gradient-to-r from-[rgb(66,66,66)] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
       <Navbar darkMode = {darkMode} isDarkMode={isDarkMode} search={Search} handleClickEvent={handleClickEvent} handleClickEvent2={handleClickEvent2} />
       <Home isDarkMode={isDarkMode} search={search} data={data} dailyData={dailyData} localTime={localTime}
-      sunriseHour={sunriseHour} sunriseMinute={sunriseMinute} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute}/>
+      sunriseHour={sunriseHour} sunriseMinute={sunriseMinute} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute} compareHour={compareHour} compareHour1={compareHour1} compareHour2={compareHour2}/>
    </div>
   )
 }

@@ -1,21 +1,42 @@
-const HourlyWeather = ({isDarkMode}) => {
+import PropsHourly from "./PropsHourly";
+let time =''
+let time1 = ''
+let time2 = ''
+let temp = 0
+let temp1 = 0
+let temp2 = 0
+let rotate = 0
+let rotate1 = 0
+let rotate2 = 0
+let windSpeed = 0
+let windSpeed1 = 0
+let windSpeed2 = 0
+const HourlyWeather = ({isDarkMode,compareHour,compareHour1,compareHour2}) => {
+    if(compareHour && compareHour1 && compareHour2 !== null){
+         time = compareHour.dt_txt.split(' ')[1]
+         time1 = compareHour1.dt_txt.split(' ')[1]
+         time2 = compareHour2.dt_txt.split(' ')[1]
+         temp = Math.floor(compareHour.main.temp)
+         temp1 = Math.floor(compareHour1.main.temp)
+         temp2 = Math.floor(compareHour2.main.temp)
+         rotate = Math.floor(compareHour.wind.deg)
+         rotate1 = Math.floor(compareHour1.wind.deg)
+         rotate2 = Math.floor(compareHour2.wind.deg)
+         windSpeed = compareHour.wind.speed
+         windSpeed1 = compareHour1.wind.speed
+         windSpeed2 = compareHour2.wind.speed
+    }
     return ( 
-        <section className={`flex flex-col pl-6 shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
+        <section className={`flex flex-col shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
             <header>
                 <h3 className="text-center text-3xl font-bold">Hourly Forecast:</h3>
             </header>
-            <aside>
-                <div className={`flex flex-col  py-4 px-4 w-24 rounded-2xl mt-4 justify-center items-center text-center ${isDarkMode?"text-white bg-[#373636]":" bg-gradient-to-b from-[#F2A853] via-[#Ecc18b] to-amber-100"} `}>
-                    <h4 className="text-2xl font-bold">12:00</h4>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-20 h-20">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                        </svg>
-                    <p className="text-lg font bold">24°C</p>
-                    <p className="text-lg font bold">Wind Speed</p>
-                    <p className="text-lg font bold">3km/hr</p>
-                </div>
-            </aside>
-        </section>
+            <div className="flex flex-row justify-evenly items-center">
+                <PropsHourly isDarkMode={isDarkMode} time={time} temp={temp} rotate={rotate} windSpeed={windSpeed}/>
+                <PropsHourly isDarkMode={isDarkMode} time={time1} temp={temp1} rotate={rotate1} windSpeed={windSpeed1}/>
+                <PropsHourly isDarkMode={isDarkMode} time={time2} temp={temp2} rotate={rotate2} windSpeed={windSpeed2}/>
+            </div>
+         </section>
      );
 }
  
