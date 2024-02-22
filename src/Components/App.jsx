@@ -197,7 +197,7 @@ const compareHours = (localTime, timeHours) => {
 
 
   return (
-   <div className={`pb-1 ${isDarkMode?"bg-gradient-to-r from-[rgb(66,66,66)] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
+   <div className={`pb-1 h-max ${isDarkMode?"bg-gradient-to-r from-[rgb(66,66,66)] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
       <Navbar darkMode = {darkMode} isDarkMode={isDarkMode} search={Search} handleClickEvent={handleClickEvent} handleClickEvent2={handleClickEvent2} />
       <Home isDarkMode={isDarkMode} search={search} data={data} dailyData={dailyData} localTime={localTime}
       sunriseHour={sunriseHour} sunriseMinute={sunriseMinute} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute} compareHour={compareHour} compareHour1={compareHour1} compareHour2={compareHour2}/>

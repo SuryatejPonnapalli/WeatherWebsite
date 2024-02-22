@@ -4,11 +4,8 @@ const PropsHourly = ({isDarkMode,time,temp,rotate,windSpeed}) => {
     let rotateArrow = '';
     if (rotate > 180 && rotate < 270){
         rotate = -(360-rotate)
-    } else if(rotate > 270){
-        rotate = -60;
     }
     rotateArrow = rotate.toString()
-    console.log(rotateArrow)
     return ( 
             <aside>
                 <div className={`flex flex-col  py-4 px-4 w-24 rounded-2xl mt-10 justify-center items-center text-center ${isDarkMode?"text-white bg-[#373636]":" bg-gradient-to-b from-[#F2A853] via-[#Ecc18b] to-amber-100"} `}>

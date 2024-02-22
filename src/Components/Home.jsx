@@ -7,7 +7,7 @@ const Home = ({isDarkMode,search,data,localTime,sunriseHour,sunriseMinute,sunset
 
 
     return ( 
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center md:flex-row md:flex-wrap md:justify-evenly">
            <DateDiv isDarkMode={isDarkMode} search={search} data={data} localTime={localTime}  /> 
            <Weather isDarkMode={isDarkMode} data={data} sunriseMinute={sunriseMinute} sunriseHour={sunriseHour} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute}/>
            <FiveDay isDarkMode={isDarkMode} data={data} />
