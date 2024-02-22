@@ -27,7 +27,7 @@ const HourlyWeather = ({isDarkMode,compareHour,compareHour1,compareHour2}) => {
          windSpeed2 = compareHour2.wind.speed
     }
     return ( 
-        <section className={`flex flex-col shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
+        <section className={`flex flex-col shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 md:w-[28rem] ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
             <header>
                 <h3 className="text-center text-3xl font-bold">Hourly Forecast:</h3>
             </header>

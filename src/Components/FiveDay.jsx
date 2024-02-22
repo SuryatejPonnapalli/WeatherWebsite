@@ -1,6 +1,6 @@
 const FiveDay = ({isDarkMode}) => {
     return ( 
-        <section className={`hidden md:flex flex-col pl-6 shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
+        <section className={`hidden md:flex flex-col pl-6 shadow-2xl w-[26rem] rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 h-[30rem] ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
             <header>
                 <h3 className="text-center text-3xl font-bold">5 Day Forecast:</h3>
             </header>
