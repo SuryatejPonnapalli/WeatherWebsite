@@ -18,6 +18,18 @@ const Weather = ({isDarkMode,data,sunriseHour,sunriseMinute,sunsetHour,sunsetMin
         visibility = data.visibility
         windSpeed = data.wind.speed;
     }
+    let width = 0;
+    // Media query to check for small screens
+  const smallScreenMediaQuery = window.matchMedia('(max-width: 932px)');
+  if (smallScreenMediaQuery.matches) {
+    width = 150; // Set a different width for small screens
+  }
+
+  // Media query to check for medium screens
+  const mediumScreenMediaQuery = window.matchMedia('(min-width: 933px) and (max-width: 1366px)');
+  if (mediumScreenMediaQuery.matches) {
+    width = 200; // Set a different width for medium screens
+  }
 
     return ( 
         <section className={`flex flex-row items-center pl-6 justify-around md:justify-between shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 md:h-[22rem] md:w-[50rem] ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
@@ -58,7 +70,7 @@ const Weather = ({isDarkMode,data,sunriseHour,sunriseMinute,sunsetHour,sunsetMin
             </article>
             <aside>
                 <div>
-                <Icon weather={weather}/>
+                <Icon weather={weather} width={width}/>
                 </div>
                 <div className="flex justify-center pt-4">
                 {data !== null ? (  <h4 className="text-2xl font-bold md:text-4xl">{weather}</h4> ) : null}
