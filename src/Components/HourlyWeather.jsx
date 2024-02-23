@@ -53,18 +53,18 @@ const HourlyWeather = ({isDarkMode,compareHour,compareHour1,compareHour2,compare
          weather4 = compareHour4.weather[0].main
     }
     return ( 
-        <section className={`flex flex-col shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 md:w-[28rem] 2xl:w-[100rem] 2xl:h-[50.1rem] 2xl:mt-[6rem] ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
+        <section className={`flex flex-col shadow-2xl w-96 rounded-3xl mt-8 pb-4 shadow-neutral-950 pt-4 md:w-[28rem] xl:w-[60rem] xl:h-[30rem]  ${isDarkMode?"text-white bg-[#444444]":"text-black bg-[#D9D9D9]"}`}>
             <header>
-                <h3 className="text-center text-3xl font-bold 2xl:text-4xl">Hourly Forecast:</h3>
+                <h3 className="text-center text-3xl font-bold xl:text-4xl">Hourly Forecast:</h3>
             </header>
             <div className="flex flex-row justify-evenly items-center">
                 <PropsHourly isDarkMode={isDarkMode} time={time} temp={temp} rotate={rotate} windSpeed={windSpeed} weather={weather}/>
                 <PropsHourly isDarkMode={isDarkMode} time={time1} temp={temp1} rotate={rotate1} windSpeed={windSpeed1} weather={weather1}/>
                 <PropsHourly isDarkMode={isDarkMode} time={time2} temp={temp2} rotate={rotate2} windSpeed={windSpeed2} weather={weather2}/>
-                <div className="hidden 2xl:flex justify-evenly items-center">
+                <div className="hidden xl:flex justify-evenly items-center">
                 <PropsHourly isDarkMode={isDarkMode} time={time3} temp={temp3} rotate={rotate3} windSpeed={windSpeed3} weather={weather3}/>
                 </div>
-                <div className="hidden 2xl:flex justify-evenly items-center">
+                <div className="hidden xl:flex justify-evenly items-center">
                 <PropsHourly isDarkMode={isDarkMode} time={time4} temp={temp4} rotate={rotate4} windSpeed={windSpeed4} weather={weather4}/>
                 </div>
             </div>

@@ -32,15 +32,15 @@ const PropsDaily = ({ localTime, timeHours }) => {
       
         const largeScreenMediaQuery = window.matchMedia('(min-width: 1367px) and (max-width: 20000px)');
         if (largeScreenMediaQuery.matches) {
-          width = 80; // Set a different width for medium screens
+          width = 40; // Set a different width for medium screens
         }
         temperatureContent = validIndices.map(index => (
-            <div className="flex flex-row items-center justify-between 2xl:space-y-8 ">
-                <div className="2xl:pt-4">
+            <div className="flex flex-row items-center justify-between ">
+                <div className="xl:pt-2">
             <Icon width={width} weather={timeHours[index].weather[0].main}  />
                  </div>
-            <p key={index} className="text-2xl font-semibold 2xl:text-4xl">{Math.floor(timeHours[index].main.temp)}°C</p>
-            <p className="text-2xl font-semibold 2xl:text-4xl">{timeHours[index].dt_txt.split(' ')[0].split('-').reverse().join('-')}</p>
+            <p key={index} className="text-2xl font-semibold xl:text-2xl">{Math.floor(timeHours[index].main.temp)}°C</p>
+            <p className="text-2xl font-semibold xl:text-xl">{timeHours[index].dt_txt.split(' ')[0].split('-').reverse().join('-')}</p>
             </div>
            
         ));
