@@ -3,6 +3,13 @@ import Home from "./Home"
 import App from "./App";
 
 const Navbar = ({darkMode,isDarkMode,search,handleClickEvent,handleClickEvent2}) => {
+        function handleKeyDown(event) {
+                if (event.key === "Enter") {
+                  handleClickEvent();
+                }
+              }
+
+              
     return ( 
         <nav className="flex flex-row justify-between items-center pt-4 px-4">
                 <label class="relative inline-flex items-center cursor-pointer">
@@ -10,8 +17,8 @@ const Navbar = ({darkMode,isDarkMode,search,handleClickEvent,handleClickEvent2})
                 <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4  rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-slate-300"></div>
                 </label>
         <span className="relative flex items-center">
-                <input type="text" placeholder="Search your city....." className={`w-72 h-8 md:w-[40rem] md:h-12 rounded-full md:placeholder:text-xl md:text-xl border-2 border-black md:pb-1 md:pl-14  xl:w-[70rem] pl-10 ${isDarkMode ? "placeholder:text-white bg-[#424242] text-white" : "placeholder:text-black bg-white border border-black text-black"}`} onChange={search} />
-             <button onClick={handleClickEvent} onSubmit={handleClickEvent}> 
+                <input type="text" placeholder="Search your city....." className={`w-72 h-8 md:w-[40rem] md:h-12 rounded-full md:placeholder:text-xl md:text-xl border-2 border-black md:pb-1 md:pl-14  xl:w-[70rem] pl-10 ${isDarkMode ? "placeholder:text-white bg-[#424242] text-white" : "placeholder:text-black bg-white border border-black text-black"}`} onChange={search} onKeyDown={handleKeyDown} />
+             <button onClick={handleClickEvent}> 
              <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`w-6 h-6 md:size-8 md:pb-1        absolute left-3 top-1/2 transform -translate-y-1/2  ${isDarkMode ? "text-white" : "text-black"}`} >
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>

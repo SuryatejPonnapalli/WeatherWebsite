@@ -34,7 +34,7 @@ function App() {
 
   const handleClickEvent = () => {
     setClick(prev => !prev)
-    Search();
+    Search({ target: { value: search } });
   }
 
   const handleClickEvent2 = () => {
