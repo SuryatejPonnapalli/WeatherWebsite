@@ -49,9 +49,13 @@ function App() {
     fetchDailyData();
   },[click])
 
+  useEffect(() => {
+    fetchDailyData();
+  },[getCurrentLocation])
+
 
   useEffect(() => {
-        currentLocation();
+      currentLocation();
     }, [data]);
   
   useEffect(() => {
