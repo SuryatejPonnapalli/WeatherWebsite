@@ -45,7 +45,7 @@ const Weather = ({isDarkMode,data,sunriseHour,sunriseMinute,sunsetHour,sunsetMin
                         {temp}°C
                     </h2>
                 ) : null}
-                  {data !== null ? (  <h4 className={`font-bold pl-2 md:pl-0  ${isDarkMode?"inline-block bg-gradient-to-r from-white to-[#747474] bg-clip-text text-xl text-transparent md:text-2xl xl:text-2xl xl:pb-20":"inline-block bg-gradient-to-r from-[#323232] to-[#A2A2A2] bg-clip-text text-xl text-transparent"}`}>
+                  {data !== null ? (  <h4 className={`font-bold pl-2 md:pl-0  ${isDarkMode?"inline-block bg-gradient-to-r from-white to-[#747474] bg-clip-text text-xl text-transparent md:text-2xl xl:text-2xl xl:pb-20":"inline-block bg-gradient-to-r from-[#323232] to-[#A2A2A2] bg-clip-text text-xl text-transparent xl:pb-20"}`}>
                         Feels like: {feelsTemp}°C
                     </h4> ) : null}
                 </div>
