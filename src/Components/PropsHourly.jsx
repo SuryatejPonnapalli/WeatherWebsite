@@ -29,13 +29,13 @@ const PropsHourly = ({isDarkMode,time,temp,rotate,windSpeed,weather}) => {
       }
 
       rotateArrow= rotate.toString();
-    console.log(rotateArrow)
+
     
 
   // Media query to check for small screens
   const smallScreenMediaQuery = window.matchMedia('(max-width:1023px)');
   if (smallScreenMediaQuery.matches) {
-    width = 90; // Set a different with for small screens
+    width = 120; // Set a different with for small screens
   }
 
   // Media query to check for medium screens
@@ -48,6 +48,7 @@ const PropsHourly = ({isDarkMode,time,temp,rotate,windSpeed,weather}) => {
   if (largeScreenMediaQuery.matches) {
     width = 120; // Set a different width for medium screens
   }
+
     return ( 
             <aside className="md:h-[26rem]">
                 <div className={`flex flex-col  py-4 px-4 w-24  rounded-2xl mt-10 justify-between items-center text-center md:w-[8rem] xl:w-[8rem] ${isDarkMode?"text-white bg-[#373636]":" bg-gradient-to-b from-[#F2A853] via-[#Ecc18b] to-amber-100"} `}>

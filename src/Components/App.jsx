@@ -10,6 +10,8 @@ function App() {
     const [dailyData, setDailyData] = useState(null);
     const [lat, setLat] = useState(null);
     const [lon, setLon] = useState(null);
+    const [lat1, setLat1] = useState(null);
+    const [lon1, setLon1] = useState(null);
     const [localTime, setLocalTime] = useState(new Date());
     const date = new Date();
     const [sunriseHour, setSunriseHour] = useState('');
@@ -57,7 +59,11 @@ function App() {
   useEffect(() => {
       currentLocation();
     }, [data]);
-  
+   
+  useEffect(() => {
+    callbackFunc();
+    },[getCurrentLocation]);
+
   useEffect(() => {
     fetchIpAddress();
     },[getCurrentLocation])
@@ -81,6 +87,18 @@ function App() {
     
   // },[getCurrentLocation])
 
+  const callbackFunc = async() => {
+    const successCallback = (position) => {
+      setLat1(position.coords.latitude);
+      setLon1(position.coords.longitude);
+    };
+    
+    const errorCallback = (error) => {
+      console.log(error);
+    };
+    
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  }
 
   const fetchInitialData = async() => {
     try{
@@ -150,9 +168,13 @@ function App() {
 
   const fetchIpAddress = async() => {
     try{
-      const response = await fetch('https://ipapi.co/json/');
+      
+      if(lat !== null && lon !== null)
+      {
+      const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?key=6b7cec98711849d2866a0c6a1f12d433&q=${lat1},${lon1}&pretty=1`);
       const data = await response.json();
-      setSearch(data.city);
+      setSearch(data.results[0].components.suburb);
+      }
     }catch(error){
       console.log("Error detected",error);
     }
