@@ -129,7 +129,7 @@ function App() {
         setSunsetMinute(minutesLocal1.toString())
       }
     }catch(error){
-      console.log("Failed to fetch address:"+error)
+      console.log("Entered wrong")
     }
   }
 
