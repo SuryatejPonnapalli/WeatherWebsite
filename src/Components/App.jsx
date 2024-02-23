@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import Home from './Home'
 
+
 function App() {
     const [data, setData] = useState(null);
     const [click, setClick] = useState(false);
@@ -20,6 +21,8 @@ function App() {
     const [compareHour, setCompareHour] = useState(null);
     const [compareHour1, setCompareHour1] = useState(null);
     const [compareHour2, setCompareHour2] = useState(null);
+    const [compareHour3, setCompareHour3] = useState(null);
+    const [compareHour4, setCompareHour4] = useState(null);
     
   const [isDarkMode,useIsDarkMode] = useState(true)
   const darkMode = () =>{
@@ -188,6 +191,8 @@ const compareHours = (localTime, timeHours) => {
               setCompareHour(timeHours[i]);
               setCompareHour1(timeHours[i + 1]);
               setCompareHour2(timeHours[i + 2]);
+              setCompareHour3(timeHours[i + 3]);
+              setCompareHour4(timeHours[i + 4]);
               break; // Exit the loop once the comparison is done
            }
        }
@@ -197,10 +202,10 @@ const compareHours = (localTime, timeHours) => {
 
 
   return (
-   <div className={`pb-1 h-max ${isDarkMode?"bg-gradient-to-r from-[rgb(66,66,66)] to-[#1f1f1f]":"bg-gradient-to-r from-white to-[#424242]"}`}>
+   <div className={`pb-1 h-max ${isDarkMode?"bg-gradient-to-b from-[rgb(66,66,66)] to-[#1f1f1f]":"bg-gradient-to-b from-white to-[#424242]"}`}>
       <Navbar darkMode = {darkMode} isDarkMode={isDarkMode} search={Search} handleClickEvent={handleClickEvent} handleClickEvent2={handleClickEvent2} />
       <Home isDarkMode={isDarkMode} search={search} data={data} dailyData={dailyData} localTime={localTime}
-      sunriseHour={sunriseHour} sunriseMinute={sunriseMinute} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute} compareHour={compareHour} compareHour1={compareHour1} compareHour2={compareHour2} timeHours={timeHours} click={click} getCurrentLocation={getCurrentLocation}/>
+      sunriseHour={sunriseHour} sunriseMinute={sunriseMinute} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute} compareHour={compareHour} compareHour1={compareHour1} compareHour2={compareHour2} timeHours={timeHours} click={click} getCurrentLocation={getCurrentLocation} compareHour3={compareHour3} compareHour4={compareHour4}/>
    </div>
   )
 }

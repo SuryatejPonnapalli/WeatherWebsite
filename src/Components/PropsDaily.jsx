@@ -1,3 +1,5 @@
+import Icon from "./Icon";
+
 const PropsDaily = ({ localTime, timeHours }) => {
     let temperatureContent = null;
 
@@ -14,15 +16,33 @@ const PropsDaily = ({ localTime, timeHours }) => {
                 validIndices.push(i); // Save the value of i
             }
         }
+        let width = 0;
 
+        // Media query to check for small screens
+        const smallScreenMediaQuery = window.matchMedia('(max-width: 932px)');
+        if (smallScreenMediaQuery.matches) {
+          width =20; // Set a different width for small screens
+        }
+      
+        // Media query to check for medium screens
+        const mediumScreenMediaQuery = window.matchMedia('(min-width: 933px) and (max-width: 1366px)');
+        if (mediumScreenMediaQuery.matches) {
+          width = 60; // Set a different width for medium screens
+        }
+      
+        const largeScreenMediaQuery = window.matchMedia('(min-width: 1367px) and (max-width: 20000px)');
+        if (largeScreenMediaQuery.matches) {
+          width = 80; // Set a different width for medium screens
+        }
         temperatureContent = validIndices.map(index => (
-            <div className="flex flex-row items-center justify-between">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-10 h-10">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                </svg>
-            <p key={index} className="text-2xl font-semibold">{Math.floor(timeHours[index].main.temp)}°C</p>
-            <p className="text-2xl font-semibold">{timeHours[index].dt_txt.split(' ')[0].split('-').reverse().join('-')}</p>
+            <div className="flex flex-row items-center justify-between 2xl:space-y-8 ">
+                <div className="2xl:pt-4">
+            <Icon width={width} weather={timeHours[index].weather[0].main}  />
+                 </div>
+            <p key={index} className="text-2xl font-semibold 2xl:text-4xl">{Math.floor(timeHours[index].main.temp)}°C</p>
+            <p className="text-2xl font-semibold 2xl:text-4xl">{timeHours[index].dt_txt.split(' ')[0].split('-').reverse().join('-')}</p>
             </div>
+           
         ));
     }
 

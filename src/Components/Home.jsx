@@ -3,7 +3,7 @@ import FiveDay from "./FiveDay";
 import HourlyWeather from "./HourlyWeather";
 import Weather from "./Weather";
 
-const Home = ({isDarkMode,search,data,localTime,sunriseHour,sunriseMinute,sunsetHour,sunsetMinute,compareHour,compareHour1,compareHour2,timeHours,click,getCurrentLocation}) => {
+const Home = ({isDarkMode,search,data,localTime,sunriseHour,sunriseMinute,sunsetHour,sunsetMinute,compareHour,compareHour1,compareHour2,timeHours,click,getCurrentLocation,compareHour3,compareHour4}) => {
 
 
     return ( 
@@ -11,7 +11,8 @@ const Home = ({isDarkMode,search,data,localTime,sunriseHour,sunriseMinute,sunset
            <DateDiv isDarkMode={isDarkMode} search={search} data={data} localTime={localTime}  /> 
            <Weather isDarkMode={isDarkMode} data={data} sunriseMinute={sunriseMinute} sunriseHour={sunriseHour} sunsetHour={sunsetHour} sunsetMinute={sunsetMinute}/>
            <FiveDay isDarkMode={isDarkMode} data={data} localTime={localTime} timeHours={timeHours}/>
-           <HourlyWeather isDarkMode={isDarkMode} data={data} compareHour={compareHour} compareHour1={compareHour1} compareHour2 = {compareHour2} click={click} getCurrentLocation={getCurrentLocation}/>
+           <HourlyWeather isDarkMode={isDarkMode} data={data} compareHour={compareHour} compareHour1={compareHour1} compareHour2 = {compareHour2} click={click} getCurrentLocation={getCurrentLocation}
+           compareHour3={compareHour3} compareHour4={compareHour4}/>
         </div>
      );
 }
