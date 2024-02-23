@@ -24,7 +24,7 @@ const Navbar = ({darkMode,isDarkMode,search,handleClickEvent,handleClickEvent2})
                 </svg>
                 </button> 
         </span>  
-             <button onClick={handleClickEvent2}><span className="h-7 w-7 md:size-14 flex flex-row xl:w-[15rem] xl:h-12 rounded-full bg-[#4BBB17] text-center pt-[0.35rem] font-semibold text-white text-sm items-center justify-center pb-[0.35rem] xl:justify-start">
+             <button onClick={handleClickEvent2}><span className="hidden md:flex h-7 w-7 md:size-14 flex-row xl:w-[15rem] xl:h-12 rounded-full bg-[#4BBB17] text-center pt-[0.35rem] font-semibold text-white text-sm items-center justify-center pb-[0.35rem] xl:justify-start">
                 <svg class="h-8 w-8 pl-2   text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r=".5" fill="currentColor" />  <circle cx="12" cy="12" r="7" />  <line x1="12" y1="3" x2="12" y2="5" />  <line x1="3" y1="12" x2="5" y2="12" />  <line x1="12" y1="19" x2="12" y2="21" />  <line x1="19" y1="12" x2="21" y2="12" /></svg>
                 <p className="hidden xl:grid text-white text-xl xl:pl-2">Current Location</p>
                 </span> </button>     
