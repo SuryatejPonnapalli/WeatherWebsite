@@ -11,7 +11,7 @@ const Navbar = ({darkMode,isDarkMode,search,handleClickEvent,handleClickEvent2})
                 </label>
         <span className="relative flex items-center">
                 <input type="text" placeholder="Search your city....." className={`w-72 h-8 md:w-[40rem] md:h-16 rounded-full md:placeholder:text-3xl md:text-3xl md:pb-2 md:pl-14 2xl:w-[120rem] pl-10 ${isDarkMode ? "placeholder:text-white bg-[#424242] text-white" : "placeholder:text-black bg-white border border-black text-black"}`} onChange={search} />
-             <button onClick={handleClickEvent}> <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`w-6 h-6 md:size-10 md:pb-2        absolute left-3 top-1/2 transform -translate-y-1/2  ${isDarkMode ? "text-white" : "text-black"}`} >
+             <button onClick={handleClickEvent} onSubmit={handleClickEvent}> <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`w-6 h-6 md:size-10 md:pb-2        absolute left-3 top-1/2 transform -translate-y-1/2  ${isDarkMode ? "text-white" : "text-black"}`} >
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
                 </button> 
