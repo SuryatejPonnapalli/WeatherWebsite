@@ -12,7 +12,7 @@ const PropsDaily = ({ localTime, timeHours }) => {
             const currentDate = parseInt(timeHours[i].dt_txt.split(' ')[0].split('-')[2]);
             const currentHour = parseInt(timeHours[i].dt_txt.split(' ')[1].split(':')[0]);
 
-            if (currentDate > parseInt(daysCurrent) && currentHour === 15) {
+            if (currentDate > parseInt(daysCurrent)) {
                 if(validIndices.length < 4){
                 validIndices.push(i); // Save the value of i
                 }
